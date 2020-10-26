@@ -4,6 +4,12 @@ This is a proposal for handling `module parameters` in a scalable way while bala
 
 The design heuristic I've relied on is "Being explicit in our intention" a sensible way to design scalable and maintainable pipelines.
 
+
+
+## SUMMARY:
+
+For improved testability and modularity, we need to rely on `namespaced-parameters` hash-map per `module` (e.g. `params.MODULE_NAME`) and `folder-structures`.
+
 ## CONTEXT: 
 
 The Workflow files have the following three aspects `parameters`, `channels` and `workflows`. Since modularity is the core proposition of DSL2 - we can establish a pattern around this.
@@ -49,7 +55,7 @@ MODULE PARAM FROM WORKFLOW FILE
 
 ## PROBLEM-1: 
 
-The above `bare minimum module` pattern, only permits us to use the parameters in the `workflow` files and as a results  modules can't be developed and tested in isolation.
+**The above `bare minimum module` pattern, only permits us to use the parameters in the `workflow` files and as a results  modules can't be developed and tested in isolation.**
 
 ## SOLUTION-1:
 
@@ -110,7 +116,7 @@ MODULE PARAMETER
 
 ## PROBLEM-2: 
 
-How do we override the module-level parameter from a workflow?
+**How do we override the module-level parameter from a workflow?**
 
 ## SOLUTION-2 
 
@@ -148,7 +154,7 @@ MODULE PARAM FROM WORKFLOW FILE
 ## PROBLEM-3: 
 
 
-When we have multiple workflows and imported modules, with their own unique parameters, how to know which parameter belongs to which process/workflow?
+**When we have multiple workflows and imported modules, with their own unique parameters, how to know which parameter belongs to which process/workflow?**
 
 
 ## SOLUTION-3: 
@@ -218,7 +224,7 @@ Odds are that as the number of processes and parameters grow, you'd find yoursel
 ## PROBLEM-4: 
 
 
-How to declare the parameters in a declarative manner i.e. using a configuration file?
+**How to declare the parameters in a declarative manner i.e. using a configuration file?**
 
 ## SOLUTION-4: 
 
@@ -255,14 +261,14 @@ workflow test {
 
 ## BONUS: 
 
-How should we structure the project?
+**How should we structure the project?**
 
 
 Recall that we wish to create scalable, maintainable pipelines while balancing **modularity**, **testability** and **customizability** of workflows. 
 
 We can rely upon the time-tested software engineering practices of `unit testing`, `integration testing` and `end-to-end testing`.
 
-- Unit testing
+#### Unit testing
 
 To develop and test modules, we can follow the tool-driven composition such as `/modules/tool_name/module_name`. 
 
@@ -299,7 +305,7 @@ modules
 The `test_params.yaml`, `test_data` and `nextflow.config` server the pupose of improving testability at the `module` level.
 
 
-- Integration testing
+#### Integration testing
 
 Following the same philosophy, we can test the `integration` of various `modules` i.e. workflow with test data. It makes sense to follow a structure similar to the `modules` since `workflows` can also be composed together and it's better to be able to test sub-workflow fast.
 
@@ -316,7 +322,7 @@ workflows
 ```
 
 
-- End-to-end testing
+#### End-to-end testing
 
 This kind of testing makes sense in scenarios where we have composite workflow(s). Let's assume we have a composite workflow at the `baseDir` level.
 
