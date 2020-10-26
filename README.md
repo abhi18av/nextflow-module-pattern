@@ -322,7 +322,8 @@ This kind of testing makes sense in scenarios where we have composite workflow(s
 
 
 ```
-main_worfklow.nf
+baseDir
+└── main_workflow.nf
 └── test_data
 └── nextflow.config
 └── test_params.yaml
