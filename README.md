@@ -16,7 +16,7 @@ The Workflow files have the following three aspects `parameters`, `channels` and
 
 
 
-Let's take a minimal `module.nf` with a an uninitialized `params.foo` like the following:
+Let's take a minimal `module.nf` with an uninitialized `params.foo` like the following:
 
 
 ```
@@ -170,7 +170,7 @@ params.SAY_HELLO = [
 ]
 
 // Soft override of module-level parameters by workflow-level parameters using DSL2 addParams config
-include { SAY_HELLO } from "./module" addParams(*:params.SAY_HELLO)
+include { SAY_HELLO } from "./module" addParams(params.SAY_HELLO)
 
 workflow test {
     SAY_HELLO()
@@ -179,8 +179,7 @@ workflow test {
 ```
 
 Notice that
-- we namespaced the parameters for any particular process/workflow using `params.PROCESS_NAME`  hash-map
-- we rely on Groovy's `*:` map-spread operator to soft-override for the module level parameters
+- we namespaced the parameters for any particular process/workflow using `params.PROCESS_NAME` 
 
 And upon execution it prints the value of `foo` from the workflow file.
 
@@ -228,7 +227,7 @@ Odds are that as the number of processes and parameters grow, you'd find yoursel
 
 ## SOLUTION-4: 
 
-The nice part about the solution-3 is that, the params file (YAML in our example) becomes namespaced and clean as well. We simply need to copy and paste the `params.PROCESS_NAME` hash-map, remove the brackets, fix indents and we are done.
+The nice part about the solution-3 is that, the params file (YAML in our example) becomes namespaced and clean as well. We simply need to copy and paste the `params.PROCESS_NAME` remove the brackets, fix indents and we are done.
 
 ```yaml
 
