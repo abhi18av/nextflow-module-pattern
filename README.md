@@ -249,7 +249,7 @@ At this point, we can either choose to keep the `workflow level` parameter in th
 ```nextflow
 nextflow.enable.dsl = 2
 
-include { SAY_HELLO } from "./module" addParams(*:params.SAY_HELLO)
+include { SAY_HELLO } from "./module" addParams(params.SAY_HELLO)
 
 workflow test {
     SAY_HELLO()
